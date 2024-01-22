@@ -22,7 +22,7 @@ services:
     depends_on: 
       - postgres
     environment:
-      PGADMIN_DEFAULT_EMAIL: postgres@example.com
+      PGADMIN_DEFAULT_EMAIL: elbayaaahmed845@gmail.com
       PGADMIN_DEFAULT_PASSWORD: password
     restart: always
 
