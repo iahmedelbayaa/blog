@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "645d4301-771e-426b-8883-15b23a4c6efe",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17170594",
+		"_collection_link": "https://restless-desert-799087.postman.co/workspace/API~a2f203a9-ec39-4a46-beaf-cb2e0de00f18/collection/17170594-645d4301-771e-426b-8883-15b23a4c6efe?action=share&source=collection_link&creator=17170594"
+	},
+	"item": [
+		{
+			"name": "v-1",
+			"item": [
+				{
+					"name": "get All user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Ahmed\",\n    \"username\":\"be3o\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "localhost:3000/api/v1/stores/save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "storeName",
+							"value": " node js",
+							"type": "text"
+						},
+						{
+							"key": "storeCode",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "be3o",
+							"type": "text"
+						},
+						{
+							"key": "publisher",
+							"value": "be3o",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "pages",
+							"value": "300",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "storeCode",
+							"value": "12",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/stores/save",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"stores",
+						"save"
+					],
+					"query": [
+						{
+							"key": "storeName",
+							"value": "be3o",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "dsdds",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
