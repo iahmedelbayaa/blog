@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserEntity } from '../models/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -74,19 +74,17 @@ export class UserService {
         return from(this.userRepository.delete(id));
     }
 
-    login(user: User): Observable<string>{
-        return this.validateUser(user.email, user.password).pipe(
-            switchMap((user: User) => {
-                if(user){
-                    return this.authService.generateJWT(user).pipe(
-                        switchMap((jwt: string) => of(jwt))
-                    )
-                }else{
-                    return 'Wrong Credentials';
-                }
-            })
-        )
-    }
+    login(user: User): Observable<string> {
+    return this.validateUser(user.email, user.password).pipe(
+        switchMap((user: User) => {
+            if(user){
+                return this.authService.generateJWT(user);
+            } else {
+                throw new UnauthorizedException('Wrong Credentials');
+            }
+        })
+    );
+}
 
     validateUser(email: string, password: string): Observable<User>{
         return this.findByEmail(email).pipe(
