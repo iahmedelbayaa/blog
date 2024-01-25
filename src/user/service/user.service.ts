@@ -2,9 +2,10 @@ import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@n
 import { UserEntity } from '../models/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../models/user.interface';
+import { User, UserRole } from '../models/user.interface';
 import { Observable, catchError, from, of, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/auth/service/auth.service';
+import {paginate,Pagination,IPaginationOptions} from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UserService {
@@ -28,7 +29,7 @@ export class UserService {
                     newUser.username = user.username;
                     newUser.password = passwordHash;
                     newUser.email = user.email;
-                    newUser.role = user.role;
+                    newUser.role = UserRole.USER;
                     return from(this.userRepository.save(newUser)).pipe(
                         switchMap((user: User) => {
                             const { password, ...result } = user;
@@ -51,6 +52,19 @@ export class UserService {
         );
     }
 
+    paginate(options: IPaginationOptions): Observable<Pagination<User>>{
+        return from(paginate<User>(this.userRepository, options)).pipe(
+            switchMap((users: Pagination<User>) => {
+                const userList = users.items.map((user) => {
+                    const { password, ...result } = user;
+                    return result;
+                });
+                return of({...users, items: userList});
+            })
+        )
+
+        
+    }
 
     findAll(): Observable<User[]>{
         return from(this.userRepository.find()).pipe(
@@ -68,6 +82,7 @@ export class UserService {
     updateOne(id: number, user: User): Observable<any>{
         delete user.email;
         delete user.password;
+        delete user.role;
         return from(this.userRepository.update(id, user));
     }
 
