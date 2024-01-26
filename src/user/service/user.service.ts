@@ -75,7 +75,7 @@ export class UserService {
             where: [
                 { username: Like(`%${user.username}%`)}
             ]
-        })).pipe(
+        })).pipe( 
             map(([users, totalUsers]) => {
                 const usersPageable: Pagination<User> = {
                     items: users,
@@ -115,7 +115,9 @@ export class UserService {
         delete user.email;
         delete user.password;
         delete user.role;
-        return from(this.userRepository.update(id, user));
+        return from(this.userRepository.update(id, user)).pipe(
+            switchMap(() => this.findOne(id))
+        );
     }
 
     updateRoleUser(id: number, user: User): Observable<any>{
