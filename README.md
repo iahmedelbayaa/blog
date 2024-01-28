@@ -60,7 +60,7 @@ Make sure you have the following installed on your machine:
 1. **Build and start the Docker containers:**
 
    ```bash
-   docker-compose up --build
+   docker-compose up -d --build
    ```
 
 2. **Access the API documentation:**
