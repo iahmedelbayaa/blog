@@ -44,7 +44,7 @@ export class UserService {
 }
 
     findOne(id: number): Observable<User>{
-        return from(this.userRepository.findOne({where :{id:id}})).pipe(
+        return from(this.userRepository.findOne({where :{id:id} , relations:['blogEntries']})).pipe(
             switchMap((user: User) => {
                 const { password, ...result } = user;
                 return of(result);
