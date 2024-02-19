@@ -12,6 +12,15 @@ describe('UserController', () => {
         ...dto,
       };
     }),
+    findOne: jest.fn(id => {
+      return {};
+    }),
+    updateOne: jest.fn((id, dto) => {
+      return {
+        id,
+        ...dto,
+      };
+    }),
   }
 
   beforeEach(async () => {
@@ -35,5 +44,19 @@ describe('UserController', () => {
       id: expect.any(Number),
       name: 'John Doe',
     });
+    expect(mockUsersService.create).toHaveBeenCalledWith({name: 'John Doe'});
   })
+
+  it('should return a user', () => {
+    expect(controller.findOne('1')).toEqual({});
+  })
+
+  expect(controller.updateOne('1', {name: 'John Doe'})).toEqual({
+    id: 1,
+    name: 'John Doe',
+  });
+  expect(mockUsersService.updateOne).toHaveBeenCalledWith('1', {name: 'John Doe'});
+
+
+
 })
